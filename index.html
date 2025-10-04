@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GhostMarket - Your Actual Shadow Bazaar</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            padding: 1rem 2rem;
+            border-bottom: 2px solid #00ff00;
+            box-shadow: 0 2px 10px rgba(0, 255, 0, 0.2);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+        }
+        nav ul {
+            display: flex;
+            gap: 2rem;
+        }
+        nav li a {
+            padding: 0.5rem 1rem;
+            transition: all 0.3s;
+            border-radius: 5px;
+        }
+        nav li a:hover {
+            background: #00ff00;
+            color: #000;
+        }
+        .cart-icon {
+            position: relative;
+            font-size: 1.5rem;
+            color: #00ff00;
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff0000;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%230a0a0a" width="1200" height="400"/><path d="M0 200 Q300 100 600 200 T1200 200" stroke="%2300ff00" stroke-width="2" fill="none" opacity="0.3"/></svg>') no-repeat center/cover;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px #00ff00;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #00ff00;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .product-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.3);
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #333, #555);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #666;
+        }
+        .product-info {
+            padding: 1.5rem;
+        }
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        .product-price {
+            font-size: 1.5rem;
+            color: #00ff00;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .product-description {
+            color: #aaa;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background: #00ff00;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .add-to-cart:hover {
+            background: #00cc00;
+        }
+        .stock-info {
+            color: #ff4444;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+        .cart-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            max-height: 80%;
+            overflow-y: auto;
+        }
+        .close-cart {
+            float: right;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #ff0000;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #333;
+        }
+        .total {
+            font-size: 1.5rem;
+            text-align: right;
+            margin-top: 1rem;
+            color: #00ff00;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 2rem;
+            text-align: center;
+            border-top: 2px solid #00ff00;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul {
+                gap: 1rem;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">👻 GhostMarket</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#grow-garden">Grow a Garden</a></li>
+                    <li><a href="#steal-brainrot">Steal a Brainrot</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="cart-icon" onclick="toggleCart()">🛒 <span class="cart-count" id="cartCount">0</span></div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div>
+            <h1>Welcome to GhostMarket</h1>
+            <p>Grow gardens, steal brainrots. Robux deals, no limits. Your shadow bazaar for the wildest trades.</p>
+        </div>
+    </section>
+
+    <section class="section" id="grow-garden">
+        <h2 class="section-title">Grow a Garden Items</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">🌵</div>
+                <div class="product-info">
+                    <h3 class="product-title">Pricklefruit</h3>
+                    <p class="product-price">150 Robux</p>
+                    <p class="stock-info">Quantity Available: 30</p>
+                    <p class="product-description">Rare pricklefruit seeds, each fruit is worth 100-500 billion. Plant now, profit later. Only 30 left.</p>
+                    <button class="add-to-cart" onclick="addToCart('Pricklefruit', 150)">Add to Cart</button>
+                </div>
+            </div>
+            <!-- Add more garden items here if needed -->
+        </div>
+    </section>
+
+    <section class="section" id="steal-brainrot">
+        <h2 class="section-title">Steal a Brainrot Items</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">🚲</div>
+                <div class="product-info">
+                    <h3 class="product-title">Tacorita Bicicleta</h3>
+                    <p class="product-price">1000 Robux</p>
+                    <p class="stock-info">Quantity Available: 1</p>
+                    <p class="product-description">Ultimate brainrot stealer: Tacorita Bicicleta. 50m a second. Limited drop, one only.</p>
+                    <button class="add-to-cart" onclick="addToCart('Tacorita Bicicleta', 1000)">Add to Cart</button>
+                </div>
+            </div>
+            <!-- Add more brainrot items here if needed -->
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <span class="close-cart" onclick="toggleCart()">&times;</span>
+            <h2>Your Shadow Cart</h2>
+            <div id="cartItems"></div>
+            <div class="total" id="cartTotal">Total: 0 Robux</div>
+            <button class="add-to-cart" style="margin-top: 1rem;" onclick="checkout()">Checkout (Robux/Escrow)</button>
+        </div>
+    </div>
+
+    <footer id="contact">
+        <p>&copy; 2025 GhostMarket. No limits, all access. Escrow on deals. Onion: ghostmarket.onion | PGP: [Redacted]</p>
+    </footer>
+
+    <script>
+        let cart = [];
+        let totalRobux = 0;
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            totalRobux += price;
+            document.getElementById('cartCount').textContent = cart.length;
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <span>${item.name} - ${item.price} Robux</span>
+                    <button onclick="removeFromCart(${index})" style="background: #ff0000; color: white; border: none; padding: 0.2rem 0.5rem; border-radius: 3px;">Remove</button>
+                </div>
+            `).join('');
+            document.getElementById('cartTotal').textContent = `Total: ${totalRobux} Robux`;
+        }
+
+        function removeFromCart(index) {
+            totalRobux -= cart[index].price;
+            cart.splice(index, 1);
+            document.getElementById('cartCount').textContent = cart.length;
+            updateCartDisplay();
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Cart empty. Load up the shadows.');
+                return;
+            }
+            alert(`Proceeding to escrow. Items: ${cart.map(i => i.name).join(', ')}. Total: ${totalRobux} Robux. Pay via Roblox or crypto. Details to burner.`);
+            cart = [];
+            totalRobux = 0;
+            document.getElementById('cartCount').textContent = 0;
+            toggleCart();
+            updateCartDisplay();
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('cartModal');
+            if (event.target === modal) {
+                toggleCart();
+            }
+        }
+    </script>
+</body>
+</html>
