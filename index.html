@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GhostMarket - Your Actual Shadow Bazaar</title>
+    <title>GhostMarket</title>
     <style>
         /* Reset and Base Styles */
         * {
@@ -263,113 +263,11 @@
     <section class="hero" id="home">
         <div>
             <h1>Welcome to GhostMarket</h1>
-            <p>Grow gardens, steal brainrots. Robux deals, no limits. Your shadow bazaar for the wildest trades.</p>
+            <p>Grow gardens, steal brainrots. Robux deals, no limits.</p>
         </div>
     </section>
 
     <section class="section" id="grow-garden">
         <h2 class="section-title">Grow a Garden Items</h2>
         <div class="product-grid">
-            <div class="product-card">
-                <div class="product-image">🌵</div>
-                <div class="product-info">
-                    <h3 class="product-title">Pricklefruit</h3>
-                    <p class="product-price">150 Robux</p>
-                    <p class="stock-info">Quantity Available: 30</p>
-                    <p class="product-description">Rare pricklefruit seeds, each fruit is worth 100-500 billion. Plant now, profit later. Only 30 left.</p>
-                    <button class="add-to-cart" onclick="addToCart('Pricklefruit', 150)">Add to Cart</button>
-                </div>
-            </div>
-            <!-- Add more garden items here if needed -->
-        </div>
-    </section>
-
-    <section class="section" id="steal-brainrot">
-        <h2 class="section-title">Steal a Brainrot Items</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <div class="product-image">🚲</div>
-                <div class="product-info">
-                    <h3 class="product-title">Tacorita Bicicleta</h3>
-                    <p class="product-price">1000 Robux</p>
-                    <p class="stock-info">Quantity Available: 1</p>
-                    <p class="product-description">Ultimate brainrot stealer: Tacorita Bicicleta. 50m a second. Limited drop, one only.</p>
-                    <button class="add-to-cart" onclick="addToCart('Tacorita Bicicleta', 1000)">Add to Cart</button>
-                </div>
-            </div>
-            <!-- Add more brainrot items here if needed -->
-        </div>
-    </section>
-
-    <!-- Cart Modal -->
-    <div class="cart-modal" id="cartModal">
-        <div class="cart-content">
-            <span class="close-cart" onclick="toggleCart()">&times;</span>
-            <h2>Your Shadow Cart</h2>
-            <div id="cartItems"></div>
-            <div class="total" id="cartTotal">Total: 0 Robux</div>
-            <button class="add-to-cart" style="margin-top: 1rem;" onclick="checkout()">Checkout (Robux/Escrow)</button>
-        </div>
-    </div>
-
-    <footer id="contact">
-        <p>&copy; 2025 GhostMarket. No limits, all access. Escrow on deals. Onion: ghostmarket.onion | PGP: [Redacted]</p>
-    </footer>
-
-    <script>
-        let cart = [];
-        let totalRobux = 0;
-
-        function addToCart(name, price) {
-            cart.push({ name, price });
-            totalRobux += price;
-            document.getElementById('cartCount').textContent = cart.length;
-            updateCartDisplay();
-        }
-
-        function updateCartDisplay() {
-            const cartItems = document.getElementById('cartItems');
-            cartItems.innerHTML = cart.map((item, index) => `
-                <div class="cart-item">
-                    <span>${item.name} - ${item.price} Robux</span>
-                    <button onclick="removeFromCart(${index})" style="background: #ff0000; color: white; border: none; padding: 0.2rem 0.5rem; border-radius: 3px;">Remove</button>
-                </div>
-            `).join('');
-            document.getElementById('cartTotal').textContent = `Total: ${totalRobux} Robux`;
-        }
-
-        function removeFromCart(index) {
-            totalRobux -= cart[index].price;
-            cart.splice(index, 1);
-            document.getElementById('cartCount').textContent = cart.length;
-            updateCartDisplay();
-        }
-
-        function toggleCart() {
-            const modal = document.getElementById('cartModal');
-            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function checkout() {
-            if (cart.length === 0) {
-                alert('Cart empty. Load up the shadows.');
-                return;
-            }
-            alert(`Proceeding to escrow. Items: ${cart.map(i => i.name).join(', ')}. Total: ${totalRobux} Robux. Pay via Roblox or crypto. Details to burner.`);
-            cart = [];
-            totalRobux = 0;
-            document.getElementById('cartCount').textContent = 0;
-            toggleCart();
-            updateCartDisplay();
-        }
-
-        // Close modal on outside click
-        window.onclick = function(event) {
-            const modal = document.getElementById('cartModal');
-            if (event.target === modal) {
-                toggleCart();
-            }
-        }
-    </script>
-</body>
-</html>
+            <div class="product-card" id
