@@ -19,7 +19,7 @@
         }
         a {
             text-decoration: none;
-            color: inherit;
+            color: #00ff00;
         }
         ul {
             list-style: none;
@@ -121,7 +121,6 @@
             border-radius: 10px;
             overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
         }
         .product-card:hover {
             transform: translateY(-5px);
@@ -169,6 +168,10 @@
         }
         .add-to-cart:hover {
             background: #00cc00;
+        }
+        .add-to-cart:disabled {
+            background: #666;
+            cursor: not-allowed;
         }
         .stock-info {
             color: #ff4444;
@@ -229,6 +232,20 @@
             color: #666;
         }
 
+        /* No JS Fallback */
+        .noscript {
+            display: none;
+        }
+        noscript .noscript {
+            display: block;
+            text-align: center;
+            padding: 2rem;
+            color: #ff4444;
+        }
+        noscript .product-card .add-to-cart {
+            display: none;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .header-container {
@@ -270,4 +287,175 @@
     <section class="section" id="grow-garden">
         <h2 class="section-title">Grow a Garden Items</h2>
         <div class="product-grid">
-            <div class="product-card" id
+            <div class="product-card" id="pricklefruit-card">
+                <div class="product-image">🌵</div>
+                <div class="product-info">
+                    <h3 class="product-title">Pricklefruit</h3>
+                    <p class="product-price" id="pricklefruit-price">150 Robux</p>
+                    <p class="stock-info" id="pricklefruit-stock">Quantity Available: 30</p>
+                    <p class="product-description">Rare pricklefruit seeds, each fruit is worth 100-500 billion. Plant now, profit later. Only 30 left.</p>
+                    <button class="add-to-cart" id="pricklefruit-button" onclick="addToCart('Pricklefruit', 'pricklefruit')">Add to Cart</button>
+                    <div class="noscript">JavaScript required for purchases. Contact us via Discord.</div>
+                </div>
+            </div>
+            <!-- Add more garden items here if needed -->
+        </div>
+    </section>
+
+    <section class="section" id="steal-brainrot">
+        <h2 class="section-title">Steal a Brainrot Items</h2>
+        <div class="product-grid">
+            <div class="product-card" id="tacorita-card">
+                <div class="product-image">🚲</div>
+                <div class="product-info">
+                    <h3 class="product-title">Tacorita Bicicleta</h3>
+                    <p class="product-price" id="tacorita-price">1000 Robux</p>
+                    <p class="stock-info" id="tacorita-stock">Quantity Available: 1</p>
+                    <p class="product-description">Ultimate brainrot stealer: Tacorita Bicicleta. 50m a second. Limited drop, one only.</p>
+                    <button class="add-to-cart" id="tacorita-button" onclick="addToCart('Tacorita Bicicleta', 'tacorita')">Add to Cart</button>
+                    <div class="noscript">JavaScript required for purchases. Contact us via Discord.</div>
+                </div>
+            </div>
+            <!-- Add more brainrot items here if needed -->
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <span class="close-cart" onclick="toggleCart()">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cartItems"></div>
+            <div class="total" id="cartTotal">Total: 0 Robux</div>
+            <button class="add-to-cart" style="margin-top: 1rem;" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <footer id="contact">
+        <p>&copy; 2025 GhostMarket. No limits, all access. Contact us via Discord: <a href="https://discord.gg/4e7kf2QQWe">https://discord.gg/4e7kf2QQWe</a></p>
+    </footer>
+
+    <script>
+        // Check if JS is enabled and hide noscript message
+        document.addEventListener('DOMContentLoaded', () => {
+            const noscriptElements = document.querySelectorAll('.noscript');
+            noscriptElements.forEach(el => el.style.display = 'none');
+        });
+
+        let cart = [];
+        let totalRobux = 0;
+        let stock = {
+            pricklefruit: 30,
+            tacorita: 1
+        };
+        let basePrices = {
+            pricklefruit: 150,
+            tacorita: 1000
+        };
+
+        function updatePrice(itemId) {
+            let priceElement = document.getElementById(`${itemId}-price`);
+            let currentStock = stock[itemId];
+            let basePrice = basePrices[itemId];
+            let newPrice = basePrice + (Math.floor(Math.random() * 50) - 25); // Random fluctuation ±25 Robux
+            priceElement.textContent = `${newPrice} Robux`;
+            basePrices[itemId] = newPrice; // Update base price
+            return newPrice;
+        }
+
+        function addToCart(name, itemId) {
+            let stockElement = document.getElementById(`${itemId}-stock`);
+            let buttonElement = document.getElementById(`${itemId}-button`);
+            let currentStock = stock[itemId];
+
+            if (currentStock <= 0) {
+                alert('Out of stock!');
+                return;
+            }
+
+            let price = updatePrice(itemId); // Real-time price update
+            cart.push({ name, price });
+            totalRobux += price;
+            stock[itemId]--;
+            stockElement.textContent = `Quantity Available: ${stock[itemId]}`;
+
+            if (stock[itemId] <= 0) {
+                buttonElement.disabled = true;
+                buttonElement.textContent = 'Out of Stock';
+                buttonElement.style.background = '#666';
+            }
+
+            document.getElementById('cartCount').textContent = cart.length;
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <span>${item.name} - ${item.price} Robux</span>
+                    <button onclick="removeFromCart(${index})" style="background: #ff0000; color: white; border: none; padding: 0.2rem 0.5rem; border-radius: 3px;">Remove</button>
+                </div>
+            `).join('');
+            document.getElementById('cartTotal').textContent = `Total: ${totalRobux} Robux`;
+        }
+
+        function removeFromCart(index) {
+            totalRobux -= cart[index].price;
+            let removedItem = cart.splice(index, 1)[0].name.toLowerCase();
+            let itemId = removedItem === 'pricklefruit' ? 'pricklefruit' : 'tacorita';
+            let stockElement = document.getElementById(`${itemId}-stock`);
+            let buttonElement = document.getElementById(`${itemId}-button`);
+
+            stock[itemId]++;
+            stockElement.textContent = `Quantity Available: ${stock[itemId]}`;
+
+            if (stock[itemId] > 0) {
+                buttonElement.disabled = false;
+                buttonElement.textContent = 'Add to Cart';
+                buttonElement.style.background = '#00ff00';
+            }
+
+            document.getElementById('cartCount').textContent = cart.length;
+            updateCartDisplay();
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Cart empty. Load up the goods.');
+                return;
+            }
+            let total = totalRobux;
+            alert(`Proceeding to payment. Total: ${total} Robux. Redirecting to payment...`);
+            window.location.href = `https://your-payment-page.com/checkout?total=${total}`; // Replace with real URL
+            cart = [];
+            totalRobux = 0;
+            document.getElementById('cartCount').textContent = 0;
+            toggleCart();
+            updateCartDisplay();
+        }
+
+        // Auto-update prices every 10 seconds
+        setInterval(() => {
+            if (document.getElementById('pricklefruit-price')) updatePrice('pricklefruit');
+            if (document.getElementById('tacorita-price')) updatePrice('tacorita');
+        }, 10000);
+
+        // Fallback if JS fails after load (rare case)
+        window.onerror = function() {
+            alert('JavaScript error detected. Please enable JavaScript or contact us via Discord.');
+        };
+    </script>
+    <noscript>
+        <div class="noscript">
+            <h2>JavaScript is disabled</h2>
+            <p>Please enable JavaScript to use GhostMarket fully. Static view below. Contact us via Discord: <a href="https://discord.gg/4e7kf2QQWe">https://discord.gg/4e7kf2QQWe</a></p>
+        </div>
+    </noscript>
+</body>
+</html>
