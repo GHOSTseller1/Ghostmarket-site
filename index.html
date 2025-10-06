@@ -348,20 +348,10 @@
             pricklefruit: 30,
             tacorita: 1
         };
-        let basePrices = {
+        let prices = {
             pricklefruit: 150,
             tacorita: 1000
         };
-
-        function updatePrice(itemId) {
-            let priceElement = document.getElementById(`${itemId}-price`);
-            let currentStock = stock[itemId];
-            let basePrice = basePrices[itemId];
-            let newPrice = basePrice + (Math.floor(Math.random() * 50) - 25); // Random fluctuation ±25 Robux
-            priceElement.textContent = `${newPrice} Robux`;
-            basePrices[itemId] = newPrice; // Update base price
-            return newPrice;
-        }
 
         function addToCart(name, itemId) {
             let stockElement = document.getElementById(`${itemId}-stock`);
@@ -373,7 +363,7 @@
                 return;
             }
 
-            let price = updatePrice(itemId); // Real-time price update
+            let price = prices[itemId]; // Static price
             cart.push({ name, price });
             totalRobux += price;
             stock[itemId]--;
@@ -431,8 +421,8 @@
                 return;
             }
             let total = totalRobux;
-            alert(`Proceeding to payment. Total: ${total} Robux. Redirecting to payment...`);
-            window.location.href = `https://your-payment-page.com/checkout?total=${total}`; // Replace with real URL
+            alert(`Proceeding to payment. Total: ${total} Robux. Redirecting to Discord...`);
+            window.location.href = `https://discord.gg/eaekQmhNK3`; // Redirect to new Discord link
             cart = [];
             totalRobux = 0;
             document.getElementById('cartCount').textContent = 0;
@@ -440,21 +430,15 @@
             updateCartDisplay();
         }
 
-        // Auto-update prices every 10 seconds
-        setInterval(() => {
-            if (document.getElementById('pricklefruit-price')) updatePrice('pricklefruit');
-            if (document.getElementById('tacorita-price')) updatePrice('tacorita');
-        }, 10000);
-
-        // Fallback if JS fails after load (rare case)
+        // Fallback if JS fails after load
         window.onerror = function() {
-            alert('JavaScript error detected. Please enable JavaScript or contact us via Discord.');
+            alert('JavaScript error detected. Please enable JavaScript or contact us via Discord: https://discord.gg/eaekQmhNK3');
         };
     </script>
     <noscript>
         <div class="noscript">
             <h2>JavaScript is disabled</h2>
-            <p>Please enable JavaScript to use GhostMarket fully. Static view below. Contact us via Discord: <a href="https://discord.gg/4e7kf2QQWe">https://discord.gg/4e7kf2QQWe</a></p>
+            <p>Please enable JavaScript to use GhostMarket fully. Static view below. Contact us via Discord: <a href="https://discord.gg/eaekQmhNK3">https://discord.gg/eaekQmhNK3</a></p>
         </div>
     </noscript>
 </body>
