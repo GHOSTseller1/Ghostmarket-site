@@ -316,6 +316,39 @@
                     <div class="noscript">JavaScript required for purchases. Contact us via Discord.</div>
                 </div>
             </div>
+            <div class="product-card" id="chachechi-card">
+                <div class="product-image">🐍</div>
+                <div class="product-info">
+                    <h3 class="product-title">Chachechi</h3>
+                    <p class="product-price" id="chachechi-price">355 Robux</p>
+                    <p class="stock-info" id="chachechi-stock">Quantity Available: 1</p>
+                    <p class="product-description">Brainrot stealer: Chachechi. 5m a second. Limited drop, one only.</p>
+                    <button class="add-to-cart" id="chachechi-button" onclick="addToCart('Chachechi', 'chachechi')">Add to Cart</button>
+                    <div class="noscript">JavaScript required for purchases. Contact us via Discord.</div>
+                </div>
+            </div>
+            <div class="product-card" id="lacucaracha-card">
+                <div class="product-image">🐞</div>
+                <div class="product-info">
+                    <h3 class="product-title">La Cucaracha</h3>
+                    <p class="product-price" id="lacucaracha-price">325 Robux</p>
+                    <p class="stock-info" id="lacucaracha-stock">Quantity Available: 1</p>
+                    <p class="product-description">Brainrot stealer: La Cucaracha. 5m a second. Limited drop, one only.</p>
+                    <button class="add-to-cart" id="lacucaracha-button" onclick="addToCart('La Cucaracha', 'lacucaracha')">Add to Cart</button>
+                    <div class="noscript">JavaScript required for purchases. Contact us via Discord.</div>
+                </div>
+            </div>
+            <div class="product-card" id="karkersahur-card">
+                <div class="product-image">🦇</div>
+                <div class="product-info">
+                    <h3 class="product-title">Karker Sahur</h3>
+                    <p class="product-price" id="karkersahur-price">400 Robux</p>
+                    <p class="stock-info" id="karkersahur-stock">Quantity Available: 1</p>
+                    <p class="product-description">Brainrot stealer: Karker Sahur. 7m a second. Limited drop, one only.</p>
+                    <button class="add-to-cart" id="karkersahur-button" onclick="addToCart('Karker Sahur', 'karkersahur')">Add to Cart</button>
+                    <div class="noscript">JavaScript required for purchases. Contact us via Discord.</div>
+                </div>
+            </div>
             <!-- Add more brainrot items here if needed -->
         </div>
     </section>
@@ -346,11 +379,17 @@
         let totalRobux = 0;
         let stock = {
             pricklefruit: 30,
-            tacorita: 1
+            tacorita: 1,
+            chachechi: 1,
+            lacucaracha: 1,
+            karkersahur: 1
         };
         let prices = {
             pricklefruit: 150,
-            tacorita: 1000
+            tacorita: 1000,
+            chachechi: 355,
+            lacucaracha: 325,
+            karkersahur: 400
         };
 
         function addToCart(name, itemId) {
@@ -393,7 +432,11 @@
         function removeFromCart(index) {
             totalRobux -= cart[index].price;
             let removedItem = cart.splice(index, 1)[0].name.toLowerCase();
-            let itemId = removedItem === 'pricklefruit' ? 'pricklefruit' : 'tacorita';
+            let itemId = removedItem === 'pricklefruit' ? 'pricklefruit' :
+                        removedItem === 'tacorita bicicleta' ? 'tacorita' :
+                        removedItem === 'chachechi' ? 'chachechi' :
+                        removedItem === 'la cucaracha' ? 'lacucaracha' :
+                        'karkersahur';
             let stockElement = document.getElementById(`${itemId}-stock`);
             let buttonElement = document.getElementById(`${itemId}-button`);
 
