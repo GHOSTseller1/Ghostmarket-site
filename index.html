@@ -291,10 +291,21 @@
                 <div class="product-image">🌵</div>
                 <div class="product-info">
                     <h3 class="product-title">Pricklefruit</h3>
-                    <p class="product-price" id="pricklefruit-price">150 Robux</p>
+                    <p class="product-price" id="pricklefruit-price">75 Robux</p>
                     <p class="stock-info" id="pricklefruit-stock">Quantity Available: 30</p>
                     <p class="product-description">Rare pricklefruit seeds, each fruit is worth 100-500 billion. Plant now, profit later. Only 30 left.</p>
                     <button class="add-to-cart" id="pricklefruit-button" onclick="addToCart('Pricklefruit', 'pricklefruit')">Add to Cart</button>
+                    <div class="noscript">JavaScript required for purchases. Contact us via Discord.</div>
+                </div>
+            </div>
+            <div class="product-card" id="agedpet-card">
+                <div class="product-image">🐶</div> <!-- Placeholder icon -->
+                <div class="product-info">
+                    <h3 class="product-title">Aged Pet</h3>
+                    <p class="product-price" id="agedpet-price">100 Robux</p>
+                    <p class="stock-info" id="agedpet-stock">Quantity Available: 30</p>
+                    <p class="product-description">Mature companion for your garden: Aged Pet. Age 30-50. Grow with wisdom.</p>
+                    <button class="add-to-cart" id="agedpet-button" onclick="addToCart('Aged Pet', 'agedpet')">Add to Cart</button>
                     <div class="noscript">JavaScript required for purchases. Contact us via Discord.</div>
                 </div>
             </div>
@@ -379,13 +390,15 @@
         let totalRobux = 0;
         let stock = {
             pricklefruit: 30,
+            agedpet: 30,
             tacorita: 1,
             chachechi: 1,
             lacucaracha: 1,
             karkersahur: 1
         };
         let prices = {
-            pricklefruit: 150,
+            pricklefruit: 75,
+            agedpet: 100,
             tacorita: 1000,
             chachechi: 355,
             lacucaracha: 325,
@@ -433,6 +446,7 @@
             totalRobux -= cart[index].price;
             let removedItem = cart.splice(index, 1)[0].name.toLowerCase();
             let itemId = removedItem === 'pricklefruit' ? 'pricklefruit' :
+                        removedItem === 'aged pet' ? 'agedpet' :
                         removedItem === 'tacorita bicicleta' ? 'tacorita' :
                         removedItem === 'chachechi' ? 'chachechi' :
                         removedItem === 'la cucaracha' ? 'lacucaracha' :
