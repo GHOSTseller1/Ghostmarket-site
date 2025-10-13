@@ -62,6 +62,7 @@
             position: relative;
             font-size: 1.5rem;
             color: #00ff00;
+            cursor: pointer;
         }
         .cart-count {
             position: absolute;
@@ -179,7 +180,7 @@
             margin-bottom: 1rem;
         }
 
-        /* Cart Modal */
+        /* Cart Modal (Remodeled) */
         .cart-modal {
             display: none;
             position: fixed;
@@ -187,40 +188,93 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             z-index: 1000;
+            justify-content: center;
+            align-items: center;
         }
         .cart-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             background: #1a1a1a;
-            padding: 2rem;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 500px;
-            max-height: 80%;
+            padding: 2rem 3rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 85vh;
             overflow-y: auto;
+            border: 2px solid #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
         }
         .close-cart {
-            float: right;
-            font-size: 2rem;
-            cursor: pointer;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2.5rem;
             color: #ff0000;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .close-cart:hover {
+            color: #cc0000;
+        }
+        .cart-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #00ff00;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px #00ff00;
+        }
+        .cart-items {
+            margin-bottom: 2rem;
         }
         .cart-item {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #222;
+            border-radius: 5px;
             margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #333;
         }
-        .total {
-            font-size: 1.5rem;
+        .cart-item span {
+            font-size: 1.1rem;
+        }
+        .cart-item button {
+            background: #ff0000;
+            color: white;
+            border: none;
+            padding: 0.3rem 0.7rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .cart-item button:hover {
+            background: #cc0000;
+        }
+        .cart-total {
+            font-size: 1.8rem;
             text-align: right;
-            margin-top: 1rem;
             color: #00ff00;
+            padding: 1rem 0;
+            border-top: 1px solid #333;
+        }
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #00ff00;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .checkout-btn:hover {
+            background: #00cc00;
+        }
+        .checkout-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
         }
 
         /* Footer */
@@ -257,6 +311,10 @@
             }
             .hero h1 {
                 font-size: 2.5rem;
+            }
+            .cart-content {
+                width: 95%;
+                padding: 1.5rem;
             }
         }
     </style>
@@ -299,11 +357,11 @@
                 </div>
             </div>
             <div class="product-card" id="agedpet-card">
-                <div class="product-image">🐶</div> <!-- Placeholder icon -->
+                <div class="product-image">🐶</div>
                 <div class="product-info">
                     <h3 class="product-title">Aged Pet</h3>
                     <p class="product-price" id="agedpet-price">100 Robux</p>
-                    <p class="stock-info" id="agedpet-stock">Quantity Available: 30</p>
+                    <p class="stock-info" id="agedpet-stock">Quantity Available: 15</p>
                     <p class="product-description">Mature companion for your garden: Aged Pet. Age 30-50. Grow with wisdom.</p>
                     <button class="add-to-cart" id="agedpet-button" onclick="addToCart('Aged Pet', 'agedpet')">Add to Cart</button>
                     <div class="noscript">JavaScript required for purchases. Contact us via Discord.</div>
@@ -364,14 +422,14 @@
         </div>
     </section>
 
-    <!-- Cart Modal -->
+    <!-- Cart Modal (Remodeled) -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-content">
             <span class="close-cart" onclick="toggleCart()">&times;</span>
-            <h2>Your Cart</h2>
-            <div id="cartItems"></div>
-            <div class="total" id="cartTotal">Total: 0 Robux</div>
-            <button class="add-to-cart" style="margin-top: 1rem;" onclick="checkout()">Checkout</button>
+            <h2 class="cart-title">Your Cart</h2>
+            <div class="cart-items" id="cartItems"></div>
+            <div class="cart-total" id="cartTotal">Total: 0 Robux</div>
+            <button class="checkout-btn" id="checkoutBtn" onclick="checkout()">Proceed to Checkout</button>
         </div>
     </div>
 
@@ -390,7 +448,7 @@
         let totalRobux = 0;
         let stock = {
             pricklefruit: 30,
-            agedpet: 30,
+            agedpet: 15,
             tacorita: 1,
             chachechi: 1,
             lacucaracha: 1,
@@ -415,7 +473,7 @@
                 return;
             }
 
-            let price = prices[itemId]; // Static price
+            let price = prices[itemId];
             cart.push({ name, price });
             totalRobux += price;
             stock[itemId]--;
@@ -429,6 +487,7 @@
 
             document.getElementById('cartCount').textContent = cart.length;
             updateCartDisplay();
+            updateCheckoutButton();
         }
 
         function updateCartDisplay() {
@@ -436,7 +495,7 @@
             cartItems.innerHTML = cart.map((item, index) => `
                 <div class="cart-item">
                     <span>${item.name} - ${item.price} Robux</span>
-                    <button onclick="removeFromCart(${index})" style="background: #ff0000; color: white; border: none; padding: 0.2rem 0.5rem; border-radius: 3px;">Remove</button>
+                    <button onclick="removeFromCart(${index})">Remove</button>
                 </div>
             `).join('');
             document.getElementById('cartTotal').textContent = `Total: ${totalRobux} Robux`;
@@ -465,11 +524,17 @@
 
             document.getElementById('cartCount').textContent = cart.length;
             updateCartDisplay();
+            updateCheckoutButton();
         }
 
         function toggleCart() {
             const modal = document.getElementById('cartModal');
-            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function updateCheckoutButton() {
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            checkoutBtn.disabled = cart.length === 0;
         }
 
         function checkout() {
@@ -478,13 +543,14 @@
                 return;
             }
             let total = totalRobux;
-            alert(`Proceeding to payment. Total: ${total} Robux. Redirecting to Discord...`);
-            window.location.href = `https://discord.gg/eaekQmhNK3`; // Redirect to new Discord link
-            cart = [];
-            totalRobux = 0;
-            document.getElementById('cartCount').textContent = 0;
-            toggleCart();
-            updateCartDisplay();
+            if (confirm(`Proceed to payment? Total: ${total} Robux. Redirecting to Discord...`)) {
+                window.location.href = `https://discord.gg/eaekQmhNK3`;
+                cart = [];
+                totalRobux = 0;
+                document.getElementById('cartCount').textContent = 0;
+                updateCartDisplay();
+                toggleCart();
+            }
         }
 
         // Fallback if JS fails after load
