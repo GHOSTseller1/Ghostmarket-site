@@ -180,7 +180,7 @@
             margin-bottom: 1rem;
         }
 
-        /* Cart Modal (Remodeled) */
+        /* Cart Modal */
         .cart-modal {
             display: none;
             position: fixed;
@@ -328,6 +328,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#grow-garden">Grow a Garden</a></li>
                     <li><a href="#steal-brainrot">Steal a Brainrot</a></li>
+                    <li><a href="#plants-vs-brainrots">Plants Vs Brainrots</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -422,7 +423,25 @@
         </div>
     </section>
 
-    <!-- Cart Modal (Remodeled) -->
+    <section class="section" id="plants-vs-brainrots">
+        <h2 class="section-title">Plants Vs Brainrots</h2>
+        <div class="product-grid">
+            <div class="product-card" id="mythicalmoneymakers-card">
+                <div class="product-image">💰</div>
+                <div class="product-info">
+                    <h3 class="product-title">Mythical Money Makers</h3>
+                    <p class="product-price" id="mythicalmoneymakers-price">500 Robux</p>
+                    <p class="stock-info" id="mythicalmoneymakers-stock">Quantity Available: 25</p>
+                    <p class="product-description">Legendary plants: Mythical Money Makers. Each one makes 1.2-3k a second. Only 25 available.</p>
+                    <button class="add-to-cart" id="mythicalmoneymakers-button" onclick="addToCart('Mythical Money Makers', 'mythicalmoneymakers')">Add to Cart</button>
+                    <div class="noscript">JavaScript required for purchases. Contact us via Discord.</div>
+                </div>
+            </div>
+            <!-- Add more Plants Vs Brainrots items here if needed -->
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-content">
             <span class="close-cart" onclick="toggleCart()">&times;</span>
@@ -452,7 +471,8 @@
             tacorita: 1,
             chachechi: 1,
             lacucaracha: 1,
-            karkersahur: 1
+            karkersahur: 1,
+            mythicalmoneymakers: 25
         };
         let prices = {
             pricklefruit: 75,
@@ -460,7 +480,8 @@
             tacorita: 1000,
             chachechi: 355,
             lacucaracha: 325,
-            karkersahur: 400
+            karkersahur: 400,
+            mythicalmoneymakers: 500
         };
 
         function addToCart(name, itemId) {
@@ -509,6 +530,7 @@
                         removedItem === 'tacorita bicicleta' ? 'tacorita' :
                         removedItem === 'chachechi' ? 'chachechi' :
                         removedItem === 'la cucaracha' ? 'lacucaracha' :
+                        removedItem === 'mythical money makers' ? 'mythicalmoneymakers' :
                         'karkersahur';
             let stockElement = document.getElementById(`${itemId}-stock`);
             let buttonElement = document.getElementById(`${itemId}-button`);
