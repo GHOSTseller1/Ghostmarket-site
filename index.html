@@ -292,6 +292,7 @@
             width: 100vw;
             height: 100vh;
             object-fit: cover;
+            playsinline; /* Mobile fix for inline playback */
         }
 
         /* Footer */
@@ -332,6 +333,9 @@
             .cart-content {
                 width: 95%;
                 padding: 1.5rem;
+            }
+            .video-loop video {
+                object-fit: contain; /* Mobile scaling fix */
             }
         }
     </style>
@@ -471,7 +475,10 @@
 
     <!-- Secret Video Loop -->
     <div class="video-loop" id="videoLoop">
-        <iframe id="goatVideo" src="https://www.reddit.com/r/analoghorror/comments/rHRa6y/the_dancing_goat/?rdt=58938" frameborder="0" allowfullscreen></iframe>
+        <video id="goatVideo" autoplay loop playsinline>
+            <source src="https://v.redd.it/sHRa6ymyeU/DancingGoat.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
 
     <footer id="contact">
@@ -601,14 +608,15 @@
         function checkStoreOut() {
             const allStockZero = Object.values(stock).every(s => s === 0);
             if (allStockZero) {
-                document.getElementById('videoLoop').style.display = 'block';
-                const iframe = document.getElementById('goatVideo');
-                iframe.src = iframe.src; // Reload iframe to ensure playback
+                const videoLoop = document.getElementById('videoLoop');
+                const video = document.getElementById('goatVideo');
+                videoLoop.style.display = 'block';
+                video.load(); // Reload source
+                video.play(); // Force play
                 document.body.style.overflow = 'hidden'; // Lock scroll
             }
         }
 
-        // Call on checkout or addToCart if stock hits zero
         // Hook into checkout
         const originalCheckout = checkout;
         checkout = function() {
@@ -624,7 +632,7 @@
         };
 
         // Fallback if JS fails after load
-        window.onerror = function() {
+        window.onerror = () => {
             alert('JavaScript error detected. Please enable JavaScript or contact us via Discord: https://discord.gg/eaekQmhNK3');
         };
     </script>
