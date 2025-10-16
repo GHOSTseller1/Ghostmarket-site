@@ -277,6 +277,23 @@
             cursor: not-allowed;
         }
 
+        /* Secret Video Loop */
+        .video-loop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: black;
+        }
+        .video-loop video {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+        }
+
         /* Footer */
         footer {
             background: #000;
@@ -452,6 +469,13 @@
         </div>
     </div>
 
+    <!-- Secret Video Loop -->
+    <div class="video-loop" id="videoLoop">
+        <video id="goatVideo" autoplay loop>
+            <source src="https://v.redd.it/sHRa6ymyeU/DancingGoat.mp4" type="video/mp4">
+        </video>
+    </div>
+
     <footer id="contact">
         <p>&copy; 2025 GhostMarket. No limits, all access. Contact us via Discord: <a href="https://discord.gg/4e7kf2QQWe">https://discord.gg/4e7kf2QQWe</a></p>
     </footer>
@@ -574,6 +598,31 @@
                 toggleCart();
             }
         }
+
+        // Secret Video Loop Trigger
+        function checkStoreOut() {
+            const allStockZero = Object.values(stock).every(s => s === 0);
+            if (allStockZero) {
+                document.getElementById('videoLoop').style.display = 'block';
+                document.getElementById('goatVideo').play();
+                document.body.style.overflow = 'hidden'; // Lock scroll
+            }
+        }
+
+        // Call on checkout or addToCart if stock hits zero
+        // Hook into checkout
+        const originalCheckout = checkout;
+        checkout = function() {
+            originalCheckout.call(this);
+            checkStoreOut();
+        };
+
+        // Hook into addToCart
+        const originalAddToCart = addToCart;
+        addToCart = function(name, itemId) {
+            originalAddToCart.call(this, name, itemId);
+            checkStoreOut();
+        };
 
         // Fallback if JS fails after load
         window.onerror = function() {
