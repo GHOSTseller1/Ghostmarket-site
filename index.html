@@ -370,7 +370,7 @@
             <div class="logo">👻 GhostMarket</div>
             <nav>
                 <ul>
-                    <li><a href="#home">Home</a></li>
+                    <li><a href="#home" onclick="handleHomeClick(event)">Home</a></li>
                     <li><a href="#grow-garden">Grow a Garden</a></li>
                     <li><a href="#steal-brainrot">Steal a Brainrot</a></li>
                     <li><a href="#plants-vs-brainrots">Plants Vs Brainrots</a></li>
@@ -505,6 +505,14 @@
         </video>
     </div>
 
+    <!-- Secret Home Video Loop -->
+    <div class="video-loop" id="homeVideoLoop" style="display: none;">
+        <video id="homeVideo" autoplay loop playsinline>
+            <source src="https://rr4---sn-q4flrnsd.googlevideo.com/videoplayback?expire=1760650218&ei=ig_xaP2QKPOa2_gP8auwiQU&ip=104.253.48.79&id=o-ACxCCRvmgRI2rpyla0eNvWBZf7x288lTSNT6g9U_pojR&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1760628618%2C&mh=Aj&mm=31%2C29&mn=sn-q4flrnsd%2Csn-q4fl6n6d&ms=au%2Crdu&mv=m&mvi=4&pl=24&rms=au%2Cau&initcwndbps=1302500&bui=ATw7iSV49NWA1KhnlihvIns-Lq0owJmia86aoU1sheD15WqCPssrIZhcgwP1EOhSlEMh9WdcEj6cTCIV&vprv=1&svpuc=1&mime=video%2Fmp4&ns=FgetkY-ormjGtGHHCTzlu14Q&rqh=1&gir=yes&clen=1328224&ratebypass=yes&dur=22.976&lmt=1760616727334646&mt=1760628210&fvip=3&lmw=1&fexp=51557447%2C51565115%2C51565682%2C51580970&c=TVHTML5&sefc=1&txp=6300224&n=3rYnjsUjrcsQ2w&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cvprv%2Csvpuc%2Cmime%2Cns%2Crqh%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AJfQdSswRQIgWVYQCZ0-hVl3TuVaW_ddr1o-MhdFlPQ2KPRVWLFjI_sCIQClJR2jlXfNP89QaiLxCB7Bhy5bAzMHN1DXo5XOM-YG9Q%3D%3D&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=APaTxxMwRQIgJjd3WeWcbjWfKOHoc6_Ccb2VjRj2ZamdcOLYxbXEjxwCIQC03TgEKZJQ3wwjB8nhqDBkB52RBtveuYqd3KoywKDz1w%3D%3D" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
     <footer id="contact">
         <p>&copy; 2025 GhostMarket. No limits, all access. Contact us via Discord: <a href="https://discord.gg/4e7kf2QQWe">https://discord.gg/4e7kf2QQWe</a></p>
     </footer>
@@ -536,6 +544,17 @@
             karkersahur: 400,
             mythicalmoneymakers: 125
         };
+
+        let homeClickCount = 0;
+
+        function handleHomeClick(event) {
+            event.preventDefault(); // Prevent default anchor behavior
+            homeClickCount++;
+            if (homeClickCount === 5) {
+                playHomeVideo();
+                homeClickCount = 0; // Reset after playing
+            }
+        }
 
         function addToCart(name, itemId) {
             let stockElement = document.getElementById(`${itemId}-stock`);
@@ -626,6 +645,15 @@
                 updateCartDisplay();
                 toggleCart();
             }
+        }
+
+        function playHomeVideo() {
+            const homeVideoLoop = document.getElementById('homeVideoLoop');
+            const homeVideo = document.getElementById('homeVideo');
+            homeVideoLoop.style.display = 'block';
+            homeVideo.load(); // Reload source
+            homeVideo.play(); // Force autoplay
+            document.body.style.overflow = 'hidden'; // Lock scroll
         }
 
         // Secret Video Loop Trigger with Ghost Text
