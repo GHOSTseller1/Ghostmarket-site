@@ -289,9 +289,11 @@
             background: black;
         }
         .video-loop video {
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            max-height: 100vh;
+            object-fit: contain;
             playsinline; /* Mobile fix for inline playback */
         }
 
@@ -335,7 +337,9 @@
                 padding: 1.5rem;
             }
             .video-loop video {
-                object-fit: contain; /* Mobile scaling fix */
+                width: 100vw;
+                height: 100vh;
+                object-fit: cover; /* Mobile full-screen */
             }
         }
     </style>
