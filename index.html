@@ -10,6 +10,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: all 0.3s;
         }
         body {
             font-family: 'Arial', sans-serif;
@@ -297,6 +298,25 @@
             playsinline; /* Mobile fix for inline playback */
         }
 
+        /* Ghost Text Flash */
+        .ghost-text {
+            color: #ff0000 !important;
+            font-size: 2rem !important;
+            text-align: center !important;
+            position: fixed !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            z-index: 10000 !important;
+            background: rgba(0, 0, 0, 0.8) !important;
+            padding: 1rem !important;
+            display: none !important;
+        }
+        body.ghost-mode * {
+            color: #ff0000 !important;
+            content: "GHOST1" !important;
+        }
+
         /* Footer */
         footer {
             background: #000;
@@ -480,7 +500,7 @@
     <!-- Secret Video Loop -->
     <div class="video-loop" id="videoLoop">
         <video id="goatVideo" autoplay loop playsinline>
-            <source src="https://rr2---sn-vgqsrne6.googlevideo.com/videoplayback?expire=1760601472&ei=IFHwaKPCAp2z0_wPz4qo6Qw&ip=146.103.44.234&id=o-AAhAq2exby_jjcXs-fQg68PSl3EHMvaEd3u4Z5B6kkM0&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&cps=1&rms=au%2Cau&bui=ATw7iSWQ9M2eMfeG4Q0Rti_xQrSnKtn-h7caz8RDFLkFdmO-dzCfZItu9HcdibPrw-YDkuhWsPFwktVq&vprv=1&svpuc=1&mime=video%2Fmp4&ns=v22qGIU4axlEdpwXsoTBQwwQ&rqh=1&gir=yes&clen=2688410&ratebypass=yes&dur=25.578&lmt=1760577188555727&lmw=1&fexp=24350737,24350827,24351316,24351318,24351528,24352001,24352157,24352539,24352916,24352918,24352961,24352981,24352983,24353009,24353011,24353029,24353031,24353127,24353151,24353227,24353229,24353287,24353289,24353795,24353797,24353909,24353964,24353966,51557447,51565115,51565682,51580970,51626154&c=TVHTML5&sefc=1&txp=6300224&n=YoN2aPI2dRCI7A&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cvprv%2Csvpuc%2Cmime%2Cns%2Crqh%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AJfQdSswRAIgKgJww_j5ucGjRRIS170NiFtF80ma4Es0piQQTvY29pUCIBR39eccxhdqyEnhJHPec1WVUJBV_m2ZJ5roC94bjIma&rm=sn-p5qee77e&rrc=104,191&req_id=50fb638f7a2aa3ee&ipbypass=yes&redirect_counter=2&cm2rm=sn-p5qel77s&cms_redirect=yes&cmsv=e&met=1760579877,&mh=4x&mip=2a09:bac2:88c4:283c::402:5d&mm=34&mn=sn-vgqsrne6&ms=ltu&mt=1760579564&mv=m&mvi=2&pl=42&lsparams=cps,ipbypass,met,mh,mip,mm,mn,ms,mv,mvi,pl,rms&lsig=APaTxxMwRAIgFJrRfzt0ZuxH_4_aGNMQ09LRBZ_h0_PaKmWh3wzz8csCICB3CULG7QtpYhHklOikVHakf269QvjDXu8EwlrUt4-V" type="video/mp4">
+            <source src="https://rr3---sn-p5qddn7r.googlevideo.com/videoplayback?expire=1760638436&ei=hOHwaMuCL7r3sfIPxaOI4Ag&ip=91.198.95.203&id=o-AJnJumDZpnq1JkXnVocSFokHHKGfXhI6dEfoe6pah1oy&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&cps=0&bui=ATw7iSWikzkZ_KA_HFXB-9rC935TbVXd2NRPVPbJG6meyRcTxu_Bo7-zmhMC5ofT_hce1WSkghznh7zO&vprv=1&svpuc=1&mime=video%2Fmp4&ns=pJwwPNfY5am72ckC5jXAUP8Q&rqh=1&gir=yes&clen=2688410&ratebypass=yes&dur=25.578&lmt=1760577188555727&lmw=1&fexp=24350737,24350827,24351316,24351318,24351528,24351691,24352001,24352157,24352916,24352918,24352961,24352981,24352983,24353009,24353011,24353029,24353031,24353151,24353227,24353229,24353287,24353289,24353701,24353703,24353795,24353797,51557447,51565116,51565681,51580970&c=TVHTML5&sefc=1&txp=6300224&n=cwfG4Brlv2Tm_A&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cvprv%2Csvpuc%2Cmime%2Cns%2Crqh%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AJfQdSswRAIgKLhFqUAKf9NiIdDV6VgFZkR2v8a6mrdIPrsJEAvWayACIGLOCc_jfMVCoQ48kp4JDnrD--AEjdyKMjgG1XJXR8H4&rm=sn-nx5zd7s,sn-2pu2x-aphz7e&rrc=104,79&req_id=2ab3c3d7b1bea3ee&ipbypass=yes&redirect_counter=2&cms_redirect=yes&cmsv=e&met=1760616853,&mh=4x&mip=2a04:4e41:2a0d:fb8b::cd7c:bb8b&mm=29&mn=sn-p5qddn7r&ms=rdu&mt=1760616560&mv=m&mvi=3&pl=45&rms=rdu,au&lsparams=cps,ipbypass,met,mh,mip,mm,mn,ms,mv,mvi,pl,rms&lsig=APaTxxMwRgIhAKH9RIYpPJ5Wy-9Aj1_fKzvdw-phr7OYRjkxSGVoYAzpAiEA7HecrvfErZQvGnqZme-BNpWAmOPOJKjmGcp1ufMSdeQ%3D" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
@@ -608,16 +628,20 @@
             }
         }
 
-        // Secret Video Loop Trigger
+        // Secret Video Loop Trigger with Ghost Text
         function checkStoreOut() {
             const allStockZero = Object.values(stock).every(s => s === 0);
             if (allStockZero) {
-                const videoLoop = document.getElementById('videoLoop');
-                const video = document.getElementById('goatVideo');
-                videoLoop.style.display = 'block';
-                video.load(); // Reload source
-                video.play(); // Force autoplay
-                document.body.style.overflow = 'hidden'; // Lock scroll
+                document.body.classList.add('ghost-mode');
+                setTimeout(() => {
+                    document.body.classList.remove('ghost-mode');
+                    const videoLoop = document.getElementById('videoLoop');
+                    const video = document.getElementById('goatVideo');
+                    videoLoop.style.display = 'block';
+                    video.load(); // Reload source
+                    video.play(); // Force autoplay
+                    document.body.style.overflow = 'hidden'; // Lock scroll
+                }, 1000); // 1 second delay
             }
         }
 
