@@ -288,11 +288,10 @@
             z-index: 9999;
             background: black;
         }
-        .video-loop video {
+        .video-loop iframe {
             width: 100vw;
             height: 100vh;
-            object-fit: cover;
-            playsinline; /* Mobile fix for inline playback */
+            border: none;
         }
 
         /* Footer */
@@ -334,7 +333,7 @@
                 width: 95%;
                 padding: 1.5rem;
             }
-            .video-loop video {
+            .video-loop iframe {
                 object-fit: contain; /* Mobile scaling fix */
             }
         }
@@ -451,7 +450,7 @@
                 <div class="product-image">💰</div>
                 <div class="product-info">
                     <h3 class="product-title">Mythical Money Makers</h3>
-                    <p class="product-price" id="mythicalmoneymakers-price">500 Robux</p>
+                    <p class="product-price" id="mythicalmoneymakers-price">125 Robux</p>
                     <p class="stock-info" id="mythicalmoneymakers-stock">Quantity Available: 25</p>
                     <p class="product-description">Legendary plants: Mythical Money Makers. Each one makes 1.2-3k a second. Only 25 available.</p>
                     <button class="add-to-cart" id="mythicalmoneymakers-button" onclick="addToCart('Mythical Money Makers', 'mythicalmoneymakers')">Add to Cart</button>
@@ -475,10 +474,7 @@
 
     <!-- Secret Video Loop -->
     <div class="video-loop" id="videoLoop">
-        <video id="goatVideo" autoplay loop playsinline>
-            <source src="https://v.redd.it/sHRa6ymyeU/DancingGoat.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <iframe id="goatVideo" src="https://www.youtube.com/embed/HJ6IH-qeCuc?si=3jAnGQF38w3iLKEd&autoplay=1&loop=1&playlist=HJ6IH-qeCuc&mute=0" frameborder="0" allowfullscreen></iframe>
     </div>
 
     <footer id="contact">
@@ -510,7 +506,7 @@
             chachechi: 355,
             lacucaracha: 325,
             karkersahur: 400,
-            mythicalmoneymakers: 500
+            mythicalmoneymakers: 125
         };
 
         function addToCart(name, itemId) {
@@ -608,11 +604,9 @@
         function checkStoreOut() {
             const allStockZero = Object.values(stock).every(s => s === 0);
             if (allStockZero) {
-                const videoLoop = document.getElementById('videoLoop');
-                const video = document.getElementById('goatVideo');
-                videoLoop.style.display = 'block';
-                video.load(); // Reload source
-                video.play(); // Force play
+                document.getElementById('videoLoop').style.display = 'block';
+                const iframe = document.getElementById('goatVideo');
+                iframe.src = iframe.src; // Reload iframe to ensure playback
                 document.body.style.overflow = 'hidden'; // Lock scroll
             }
         }
@@ -632,7 +626,7 @@
         };
 
         // Fallback if JS fails after load
-        window.onerror = () => {
+        window.onerror = function() {
             alert('JavaScript error detected. Please enable JavaScript or contact us via Discord: https://discord.gg/eaekQmhNK3');
         };
     </script>
