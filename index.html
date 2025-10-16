@@ -471,9 +471,7 @@
 
     <!-- Secret Video Loop -->
     <div class="video-loop" id="videoLoop">
-        <video id="goatVideo" autoplay loop>
-            <source src="https://v.redd.it/sHRa6ymyeU/DancingGoat.mp4" type="video/mp4">
-        </video>
+        <iframe id="goatVideo" src="https://www.reddit.com/r/analoghorror/comments/rHRa6y/the_dancing_goat/?rdt=58938" frameborder="0" allowfullscreen></iframe>
     </div>
 
     <footer id="contact">
@@ -604,7 +602,8 @@
             const allStockZero = Object.values(stock).every(s => s === 0);
             if (allStockZero) {
                 document.getElementById('videoLoop').style.display = 'block';
-                document.getElementById('goatVideo').play();
+                const iframe = document.getElementById('goatVideo');
+                iframe.src = iframe.src; // Reload iframe to ensure playback
                 document.body.style.overflow = 'hidden'; // Lock scroll
             }
         }
