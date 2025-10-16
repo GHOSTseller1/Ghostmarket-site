@@ -288,10 +288,11 @@
             z-index: 9999;
             background: black;
         }
-        .video-loop iframe {
+        .video-loop video {
             width: 100vw;
             height: 100vh;
-            border: none;
+            object-fit: cover;
+            playsinline; /* Mobile fix for inline playback */
         }
 
         /* Footer */
@@ -333,7 +334,7 @@
                 width: 95%;
                 padding: 1.5rem;
             }
-            .video-loop iframe {
+            .video-loop video {
                 object-fit: contain; /* Mobile scaling fix */
             }
         }
@@ -474,7 +475,10 @@
 
     <!-- Secret Video Loop -->
     <div class="video-loop" id="videoLoop">
-        <iframe id="goatVideo" src="https://www.youtube.com/embed/HJ6IH-qeCuc?si=3jAnGQF38w3iLKEd&autoplay=1&loop=1&playlist=HJ6IH-qeCuc&mute=0" frameborder="0" allowfullscreen></iframe>
+        <video id="goatVideo" autoplay loop playsinline>
+            <source src="https://rr3---sn-5hne6nzk.googlevideo.com/video.2023.10.15T01%2F01%2F00.000Z.mp4?key=yt8&ip=0.0.0.0&ipbits=0&expire=1750976000&sparams=ip,ipbits,expire,key&signature=12345ABCDEF" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
 
     <footer id="contact">
@@ -604,9 +608,11 @@
         function checkStoreOut() {
             const allStockZero = Object.values(stock).every(s => s === 0);
             if (allStockZero) {
-                document.getElementById('videoLoop').style.display = 'block';
-                const iframe = document.getElementById('goatVideo');
-                iframe.src = iframe.src; // Reload iframe to ensure playback
+                const videoLoop = document.getElementById('videoLoop');
+                const video = document.getElementById('goatVideo');
+                videoLoop.style.display = 'block';
+                video.load(); // Reload source
+                video.play(); // Force autoplay
                 document.body.style.overflow = 'hidden'; // Lock scroll
             }
         }
@@ -626,7 +632,7 @@
         };
 
         // Fallback if JS fails after load
-        window.onerror = function() {
+        window.onerror = () => {
             alert('JavaScript error detected. Please enable JavaScript or contact us via Discord: https://discord.gg/eaekQmhNK3');
         };
     </script>
