@@ -10,6 +10,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: all 0.3s;
         }
         body {
             font-family: 'Arial', sans-serif;
@@ -295,6 +296,25 @@
             max-height: 100vh;
             object-fit: contain;
             playsinline; /* Mobile fix for inline playback */
+        }
+
+        /* Ghost Text Flash */
+        .ghost-text {
+            color: #ff0000 !important;
+            font-size: 2rem !important;
+            text-align: center !important;
+            position: fixed !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            z-index: 10000 !important;
+            background: rgba(0, 0, 0, 0.8) !important;
+            padding: 1rem !important;
+            display: none !important;
+        }
+        body.ghost-mode * {
+            color: #ff0000 !important;
+            content: "GHOST1" !important;
         }
 
         /* Footer */
@@ -608,16 +628,20 @@
             }
         }
 
-        // Secret Video Loop Trigger
+        // Secret Video Loop Trigger with Ghost Text
         function checkStoreOut() {
             const allStockZero = Object.values(stock).every(s => s === 0);
             if (allStockZero) {
-                const videoLoop = document.getElementById('videoLoop');
-                const video = document.getElementById('goatVideo');
-                videoLoop.style.display = 'block';
-                video.load(); // Reload source
-                video.play(); // Force autoplay
-                document.body.style.overflow = 'hidden'; // Lock scroll
+                document.body.classList.add('ghost-mode');
+                setTimeout(() => {
+                    document.body.classList.remove('ghost-mode');
+                    const videoLoop = document.getElementById('videoLoop');
+                    const video = document.getElementById('goatVideo');
+                    videoLoop.style.display = 'block';
+                    video.load(); // Reload source
+                    video.play(); // Force autoplay
+                    document.body.style.overflow = 'hidden'; // Lock scroll
+                }, 1000); // 1 second delay
             }
         }
 
