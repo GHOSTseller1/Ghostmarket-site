@@ -562,6 +562,10 @@
             homeVideoLoop.style.display = 'block';
             homeVideo.load(); // Reload source
             homeVideo.play(); // Force autoplay
+            document.body.classList.add('ghost-mode');
+            setTimeout(() => {
+                document.body.classList.remove('ghost-mode');
+            }, 1000); // Match stock-out flash duration
             document.body.style.overflow = 'hidden'; // Lock scroll
         }
 
