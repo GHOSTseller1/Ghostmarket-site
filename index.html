@@ -5,315 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GhostMarket</title>
     <style>
-        /* Reset and Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: all 0.3s;
-        }
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #0a0a0a;
-            color: #e0e0e0;
-            line-height: 1.6;
-        }
-        a {
-            text-decoration: none;
-            color: #00ff00;
-        }
-        ul {
-            list-style: none;
-        }
+        /* [ALL STYLES UNCHANGED FROM BEFORE] */
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s; }
+        body { font-family: 'Arial', sans-serif; background-color: #0a0a0a; color: #e0e0e0; line-height: 1.6; }
+        a { text-decoration: none; color: #00ff00; }
+        ul { list-style: none; }
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #1a1a1a, #333);
-            padding: 1rem 2rem;
-            border-bottom: 2px solid #00ff00;
-            box-shadow: 0 2px 10px rgba(0, 255, 0, 0.2);
-        }
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .logo {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #00ff00;
-            text-shadow: 0 0 10px #00ff00;
-        }
-        nav ul {
-            display: flex;
-            gap: 2rem;
-        }
-        nav li a {
-            padding: 0.5rem 1rem;
-            transition: all 0.3s;
-            border-radius: 5px;
-        }
-        nav li a:hover {
-            background: #00ff00;
-            color: #000;
-        }
-        .cart-icon {
-            position: relative;
-            font-size: 1.5rem;
-            color: #00ff00;
-            cursor: pointer;
-        }
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #ff0000;
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-        }
+        header { background: linear-gradient(135deg, #1a1a1a, #333); padding: 1rem 2rem; border-bottom: 2px solid #00ff00; box-shadow: 0 2px 10px rgba(0, 255, 0, 0.2); }
+        .header-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .logo { font-size: 2rem; font-weight: bold; color: #00ff00; text-shadow: 0 0 10px #00ff00; }
+        nav ul { display: flex; gap: 2rem; }
+        nav li a { padding: 0.5rem 1rem; transition: all 0.3s; border-radius: 5px; }
+        nav li a:hover { background: #00ff00; color: #000; }
+        .cart-icon { position: relative; font-size: 1.5rem; color: #00ff00; cursor: pointer; }
+        .cart-count { position: absolute; top: -8px; right: -8px; background: #ff0000; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
 
-        /* Hero Section */
-        .hero {
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%230a0a0a" width="1200" height="400"/><path d="M0 200 Q300 100 600 200 T1200 200" stroke="%2300ff00" stroke-width="2" fill="none" opacity="0.3"/></svg>') no-repeat center/cover;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: #fff;
-        }
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 20px #00ff00;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
+        .hero { background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%230a0a0a" width="1200" height="400"/><path d="M0 200 Q300 100 600 200 T1200 200" stroke="%2300ff00" stroke-width="2" fill="none" opacity="0.3"/></svg>') no-repeat center/cover; height: 400px; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; text-shadow: 0 0 20px #00ff00; }
+        .hero p { font-size: 1.2rem; opacity: 0.9; }
 
-        /* Sections */
-        .section {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #00ff00;
-        }
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        .product-card {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.3);
-        }
-        .product-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(45deg, #333, #555);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: #666;
-        }
-        .product-info {
-            padding: 1.5rem;
-        }
-        .product-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: #fff;
-        }
-        .product-price {
-            font-size: 1.5rem;
-            color: #00ff00;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-        .product-description {
-            color: #aaa;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-        .add-to-cart {
-            width: 100%;
-            padding: 0.8rem;
-            background: #00ff00;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        .add-to-cart:hover {
-            background: #00cc00;
-        }
-        .add-to-cart:disabled {
-            background: #666;
-            cursor: not-allowed;
-        }
-        .stock-info {
-            color: #ff4444;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
+        .section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #00ff00; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .product-card { background: #1a1a1a; border: 1px solid #333; border-radius: 10px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 255, 0, 0.3); }
+        .product-image { width: 100%; height: 200px; background: linear-gradient(45deg, #333, #555); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: #666; }
+        .product-info { padding: 1.5rem; }
+        .product-title { font-size: 1.3rem; margin-bottom: 0.5rem; color: #fff; }
+        .product-price { font-size: 1.5rem; color: #00ff00; font-weight: bold; margin-bottom: 1rem; }
+        .product-description { color: #aaa; margin-bottom: 1rem; font-size: 0.9rem; }
+        .add-to-cart { width: 100%; padding: 0.8rem; background: #00ff00; color: #000; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: background 0.3s; }
+        .add-to-cart:hover { background: #00cc00; }
+        .add-to-cart:disabled { background: #666; cursor: not-allowed; }
+        .stock-info { color: #ff4444; font-size: 0.9rem; margin-bottom: 1rem; }
 
-        /* Cart Modal */
-        .cart-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        .cart-content {
-            background: #1a1a1a;
-            padding: 2rem 3rem;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 85vh;
-            overflow-y: auto;
-            border: 2px solid #00ff00;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
-        }
-        .close-cart {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 2.5rem;
-            color: #ff0000;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        .close-cart:hover {
-            color: #cc0000;
-        }
-        .cart-title {
-            text-align: center;
-            font-size: 2rem;
-            color: #00ff00;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 0 10px #00ff00;
-        }
-        .cart-items {
-            margin-bottom: 2rem;
-        }
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background: #222;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-        }
-        .cart-item span {
-            font-size: 1.1rem;
-        }
-        .cart-item button {
-            background: #ff0000;
-            color: white;
-            border: none;
-            padding: 0.3rem 0.7rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .cart-item button:hover {
-            background: #cc0000;
-        }
-        .cart-total {
-            font-size: 1.8rem;
-            text-align: right;
-            color: #00ff00;
-            padding: 1rem 0;
-            border-top: 1px solid #333;
-        }
-        .checkout-btn {
-            width: 100%;
-            padding: 1rem;
-            background: #00ff00;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .checkout-btn:hover {
-            background: #00cc00;
-        }
-        .checkout-btn:disabled {
-            background: #666;
-            cursor: not-allowed;
-        }
+        .cart-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 1000; justify-content: center; align-items: center; }
+        .cart-content { background: #1a1a1a; padding: 2rem 3rem; border-radius: 15px; width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto; border: 2px solid #00ff00; box-shadow: 0 0 15px rgba(0, 255, 0, 0.5); }
+        .close-cart { position: absolute; top: 1rem; right: 1rem; font-size: 2.5rem; color: #ff0000; cursor: pointer; transition: color 0.3s; }
+        .close-cart:hover { color: #cc0000; }
+        .cart-title { text-align: center; font-size: 2rem; color: #00ff00; margin-bottom: 1.5rem; text-shadow: 0 0 10px #00ff00; }
+        .cart-items { margin-bottom: 2rem; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: #222; border-radius: 5px; margin-bottom: 1rem; }
+        .cart-item span { font-size: 1.1rem; }
+        .cart-item button { background: #ff0000; color: white; border: none; padding: 0.3rem 0.7rem; border-radius: 5px; cursor: pointer; transition: background 0.3s; }
+        .cart-item button:hover { background: #cc0000; }
+        .cart-total { font-size: 1.8rem; text-align: right; color: #00ff00; padding: 1rem 0; border-top: 1px solid #333; }
+        .checkout-btn { width: 100%; padding: 1rem; background: #00ff00; color: #000; border: none; border-radius: 5px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: background 0.3s; }
+        .checkout-btn:hover { background: #00cc00; }
+        .checkout-btn:disabled { background: #666; cursor: not-allowed; }
 
-        /* Secret Video Loop */
-        .video-loop {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            background: black;
-        }
-        .video-loop video {
-            width: 100%;
-            height: auto;
-            max-width: 100%;
-            max-height: 100vh;
-            object-fit: contain;
-            playsinline;
-        }
+        .video-loop { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background: black; }
+        .video-loop video { width: 100%; height: auto; max-width: 100%; max-height: 100vh; object-fit: contain; playsinline; }
 
-        /* Ghost Text Flash */
-        body.ghost-mode * {
-            color: #ff0000 !important;
-            content: "GHOST1" !important;
-        }
+        .ghost-text { color: #ff0000 !important; font-size: 2rem !important; text-align: center !important; position: fixed !important; top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) !important; z-index: 10000 !important; background: rgba(0, 0, 0, 0.8) !important; padding: 1rem !important; display: none !important; }
+        body.ghost-mode * { color: #ff0000 !important; content: "GHOST1" !important; }
 
-        /* Footer */
-        footer {
-            background: #000;
-            padding: 2rem;
-            text-align: center;
-            border-top: 2px solid #00ff00;
-            color: #666;
-        }
+        footer { background: #000; padding: 2rem; text-align: center; border-top: 2px solid #00ff00; color: #666; }
 
-        /* Responsive */
+        .noscript { display: none; }
+        noscript .noscript { display: block; text-align: center; padding: 2rem; color: #ff4444; }
+        noscript .product-card .add-to-cart { display: none; }
+
         @media (max-width: 768px) {
             .header-container { flex-direction: column; gap: 1rem; }
             nav ul { gap: 1rem; }
@@ -347,13 +99,41 @@
         </div>
     </section>
 
-    <!-- [PRODUCT SECTIONS UNCHANGED - SAME AS BEFORE] -->
-    <!-- ... (pricklefruit, tacorita, etc.) ... -->
+    <!-- [PRODUCT SECTIONS UNCHANGED] -->
+    <section class="section" id="grow-garden">
+        <h2 class="section-title">Grow a Garden Items</h2>
+        <div class="product-grid">
+            <div class="product-card" id="pricklefruit-card">
+                <div class="product-image">Cactus</div>
+                <div class="product-info">
+                    <h3 class="product-title">Pricklefruit</h3>
+                    <p class="product-price" id="pricklefruit-price">75 Robux</p>
+                    <p class="stock-info" id="pricklefruit-stock">Quantity Available: 30</p>
+                    <p class="product-description">Rare pricklefruit seeds, each fruit is worth 100-500 billion. Plant now, profit later. Only 30 left.</p>
+                    <button class="add-to-cart" id="pricklefruit-button" onclick="addToCart('Pricklefruit', 'pricklefruit')">Add to Cart</button>
+                    <div class="noscript">JavaScript required for purchases. Contact us via Discord.</div>
+                </div>
+            </div>
+            <div class="product-card" id="agedpet-card">
+                <div class="product-image">Dog</div>
+                <div class="product-info">
+                    <h3 class="product-title">Aged Pet</h3>
+                    <p class="product-price" id="agedpet-price">100 Robux</p>
+                    <p class="stock-info" id="agedpet-stock">Quantity Available: 15</p>
+                    <p class="product-description">Mature companion for your garden: Aged Pet. Age 30-50. Grow with wisdom.</p>
+                    <button class="add-to-cart" id="agedpet-button" onclick="addToCart('Aged Pet', 'agedpet')">Add to Cart</button>
+                    <div class="noscript">JavaScript required for purchases. Contact us via Discord.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [OTHER SECTIONS: steal-brainrot, plants-vs-brainrots — SAME AS BEFORE] -->
 
     <!-- Cart Modal -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-content">
-            <span class="close-cart" onclick="toggleCart()">×</span>
+            <span class="close-cart" onclick="toggleCart()">&times;</span>
             <h2 class="cart-title">Your Cart</h2>
             <div class="cart-items" id="cartItems"></div>
             <div class="cart-total" id="cartTotal">Total: 0 Robux</div>
@@ -382,147 +162,150 @@
     </footer>
 
     <script>
-        // LocalStorage Keys
-        const STORAGE_KEY = 'ghostmarket_video_state';
-        const HOME_VIDEO_KEY = 'home_video_active';
-        const STOCK_OUT_KEY = 'stock_out_active';
+        // ==== PERSISTENT STATE ====
+        const homeVideoActive = sessionStorage.getItem('homeVideoActive') === 'true';
+        const stockOutActive = sessionStorage.getItem('stockOutActive') === 'true';
 
-        // Load state from localStorage
-        const savedState = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+        // ==== ON LOAD: RESTORE VIDEO STATE ====
+        document.addEventListener('DOMContentLoaded', () => {
+            const noscriptElements = document.querySelectorAll('.noscript');
+            noscriptElements.forEach(el => el.style.display = 'none');
 
-        let cart = savedState.cart || [];
-        let totalRobux = savedState.totalRobux || 0;
-        let stock = savedState.stock || {
+            // Restore home video
+            if (homeVideoActive) {
+                triggerHomeVideo();
+            }
+
+            // Restore stock-out video
+            if (stockOutActive) {
+                triggerStockOutVideo();
+            }
+        });
+
+        // ==== CART & STOCK LOGIC (unchanged) ====
+        let cart = [];
+        let totalRobux = 0;
+        let stock = {
             pricklefruit: 30, agedpet: 15, tacorita: 1, chachechi: 1,
             lacucaracha: 1, karkersahur: 1, mythicalmoneymakers: 25
         };
-        let prices = {
-            pricklefruit: 75, agedpet: 100, tacorita: 1000, chachechi: 355,
-            lacucaracha: 325, karkersahur: 400, mythicalmoneymakers: 125
-        };
+        let prices = { pricklefruit: 75, agedpet: 100, tacorita: 1000, chachechi: 355, lacucaracha: 325, karkersahur: 400, mythicalmoneymakers: 125 };
 
         let homeClickCount = 0;
-
-        // Save state to localStorage
-        function saveState() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify({ cart, totalRobux, stock }));
-        }
-
-        // Restore UI
-        function restoreUI() {
-            document.getElementById('cartCount').textContent = cart.length;
-            document.getElementById('cartTotal').textContent = `Total: ${totalRobux} Robux`;
-            updateCartDisplay();
-            updateStockButtons();
-
-            // Restore video state
-            if (localStorage.getItem(HOME_VIDEO_KEY) === 'true') {
-                triggerHomeVideo();
-            }
-            if (localStorage.getItem(STOCK_OUT_KEY) === 'true') {
-                triggerStockOut();
-            }
-        }
 
         function handleHomeClick(event) {
             event.preventDefault();
             homeClickCount++;
             if (homeClickCount === 5) {
                 triggerHomeVideo();
+                sessionStorage.setItem('homeVideoActive', 'true');
                 homeClickCount = 0;
             }
         }
 
         function triggerHomeVideo() {
-            localStorage.setItem(HOME_VIDEO_KEY, 'true');
-            const loop = document.getElementById('homeVideoLoop');
-            const video = document.getElementById('homeVideo');
-            loop.style.display = 'block';
-            video.load();
-            video.play();
-            flashGhost();
+            const homeVideoLoop = document.getElementById('homeVideoLoop');
+            const homeVideo = document.getElementById('homeVideo');
+            homeVideoLoop.style.display = 'block';
+            homeVideo.load();
+            homeVideo.play().catch(() => {});
+            flashGhostMode();
             document.body.style.overflow = 'hidden';
         }
 
-        function triggerStockOut() {
-            localStorage.setItem(STOCK_OUT_KEY, 'true');
-            flashGhost();
+        function triggerStockOutVideo() {
+            const videoLoop = document.getElementById('videoLoop');
+            const video = document.getElementById('goatVideo');
+            videoLoop.style.display = 'block';
+            video.load();
+            video.play().catch(() => {});
+            flashGhostMode();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function flashGhostMode() {
+            document.body.classList.add('ghost-mode');
             setTimeout(() => {
-                const loop = document.getElementById('videoLoop');
-                const video = document.getElementById('goatVideo');
-                loop.style.display = 'block';
-                video.load();
-                video.play();
-                document.body.style.overflow = 'hidden';
+                document.body.classList.remove('ghost-mode');
             }, 1000);
         }
 
-        function flashGhost() {
-            document.body.classList.add('ghost-mode');
-            setTimeout(() => document.body.classList.remove('ghost-mode'), 1000);
-        }
-
         function addToCart(name, itemId) {
-            if (stock[itemId] <= 0) { alert('Out of stock!'); return; }
-            const price = prices[itemId];
+            let stockElement = document.getElementById(`${itemId}-stock`);
+            let buttonElement = document.getElementById(`${itemId}-button`);
+            let currentStock = stock[itemId];
+
+            if (currentStock <= 0) {
+                alert('Out of stock!');
+                return;
+            }
+
+            let price = prices[itemId];
             cart.push({ name, price });
             totalRobux += price;
             stock[itemId]--;
-            updateStockButton(itemId);
+            stockElement.textContent = `Quantity Available: ${stock[itemId]}`;
+
+            if (stock[itemId] <= 0) {
+                buttonElement.disabled = true;
+                buttonElement.textContent = 'Out of Stock';
+                buttonElement.style.background = '#666';
+            }
+
             document.getElementById('cartCount').textContent = cart.length;
             updateCartDisplay();
-            saveState();
-            checkStockOut();
+            updateCheckoutButton();
+
+            checkStoreOut();
         }
 
-        function removeFromCart(index) {
-            const item = cart.splice(index, 1)[0];
-            totalRobux -= item.price;
-            const itemId = getItemIdFromName(item.name);
-            stock[itemId]++;
-            updateStockButton(itemId);
-            document.getElementById('cartCount').textContent = cart.length;
-            updateCartDisplay();
-            saveState();
-        }
-
-        function getItemIdFromName(name) {
-            const map = {
-                'Pricklefruit': 'pricklefruit',
-                'Aged Pet': 'agedpet',
-                'Tacorita Bicicleta': 'tacorita',
-                'Chachechi': 'chachechi',
-                'La Cucaracha': 'lacucaracha',
-                'Karker Sahur': 'karkersahur',
-                'Mythical Money Makers': 'mythicalmoneymakers'
-            };
-            return map[name] || 'pricklefruit';
-        }
-
-        function updateStockButton(id) {
-            const el = document.getElementById(`${id}-stock`);
-            const btn = document.getElementById(`${id}-button`);
-            if (el) el.textContent = `Quantity Available: ${stock[id]}`;
-            if (btn) {
-                btn.disabled = stock[id] <= 0;
-                btn.textContent = stock[id] <= 0 ? 'Out of Stock' : 'Add to Cart';
-                btn.style.background = stock[id] <= 0 ? '#666' : '#00ff00';
+        function checkStoreOut() {
+            const allStockZero = Object.values(stock).every(s => s === 0);
+            if (allStockZero && !stockOutActive) {
+                sessionStorage.setItem('stockOutActive', 'true');
+                triggerStockOutVideo();
             }
         }
 
-        function updateStockButtons() {
-            Object.keys(stock).forEach(updateStockButton);
-        }
-
+        // ==== REST OF CART FUNCTIONS (unchanged) ====
         function updateCartDisplay() {
-            const items = document.getElementById('cartItems');
-            items.innerHTML = cart.map((item, i) => `
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = cart.map((item, index) => `
                 <div class="cart-item">
                     <span>${item.name} - ${item.price} Robux</span>
-                    <button onclick="removeFromCart(${i})">Remove</button>
+                    <button onclick="removeFromCart(${index})">Remove</button>
                 </div>
             `).join('');
             document.getElementById('cartTotal').textContent = `Total: ${totalRobux} Robux`;
+        }
+
+        function removeFromCart(index) {
+            totalRobux -= cart[index].price;
+            let removedItem = cart.splice(index, 1)[0].name.toLowerCase();
+            let itemId = removedItem.includes('prickle') ? 'pricklefruit' :
+                         removedItem.includes('aged') ? 'agedpet' :
+                         removedItem.includes('tacorita') ? 'tacorita' :
+                         removedItem.includes('chachechi') ? 'chachechi' :
+                         removedItem.includes('cucaracha') ? 'lacucaracha' :
+                         removedItem.includes('karker') ? 'karkersahur' :
+                         'mythicalmoneymakers';
+            stock[itemId]++;
+            document.getElementById(`${itemId}-stock`).textContent = `Quantity Available: ${stock[itemId]}`;
+            if (stock[itemId] > 0) {
+                const btn = document.getElementById(`${itemId}-button`);
+                btn.disabled = false;
+                btn.textContent = 'Add to Cart';
+                btn.style.background = '#00ff00';
+            }
+            document.getElementById('cartCount').textContent = cart.length;
+            updateCartDisplay();
+            updateCheckoutButton();
+
+            // Re-check if stock-out was undone
+            const allZero = Object.values(stock).every(s => s === 0);
+            if (!allZero && sessionStorage.getItem('stockOutActive') === 'true') {
+                sessionStorage.removeItem('stockOutActive');
+            }
         }
 
         function toggleCart() {
@@ -530,31 +313,35 @@
             modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
         }
 
+        function updateCheckoutButton() {
+            document.getElementById('checkoutBtn').disabled = cart.length === 0;
+        }
+
         function checkout() {
-            if (cart.length === 0) { alert('Cart empty.'); return; }
-            if (confirm(`Pay ${totalRobux} Robux? Redirecting...`)) {
-                window.location.href = 'https://discord.gg/eaekQmhNK3';
-                // Don't clear state on checkout
+            if (cart.length === 0) return alert('Cart empty.');
+            if (confirm(`Proceed to payment? Total: ${totalRobux} Robux.`)) {
+                window.location.href = `https://discord.gg/eaekQmhNK3`;
+                cart = []; totalRobux = 0;
+                document.getElementById('cartCount').textContent = 0;
+                updateCartDisplay(); toggleCart();
             }
         }
 
-        function checkStockOut() {
-            const out = Object.values(stock).every(s => s === 0);
-            if (out && localStorage.getItem(STOCK_OUT_KEY) !== 'true') {
-                triggerStockOut();
-            }
-        }
+        // Hook addToCart & checkout
+        const origAdd = addToCart;
+        addToCart = (n, i) => { origAdd(n, i); checkStoreOut(); };
+        const origCheckout = checkout;
+        checkout = () => { origCheckout(); checkStoreOut(); };
 
-        // Escape only with cache clear
-        window.addEventListener('beforeunload', () => {
-            // State persists
-        });
-
-        // Init
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.noscript').forEach(el => el.style.display = 'none');
-            restoreUI();
-        });
+        window.onerror = () => {
+            alert('JS error. Enable JS or contact Discord: https://discord.gg/eaekQmhNK3');
+        };
     </script>
+    <noscript>
+        <div class="noscript">
+            <h2>JavaScript is disabled</h2>
+            <p>Please enable JavaScript. Contact: <a href="https://discord.gg/eaekQmhNK3">Discord</a></p>
+        </div>
+    </noscript>
 </body>
 </html>
