@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GhostMarket</title>
     <style>
-        /* [ALL STYLES UNCHANGED FROM BEFORE] */
         * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s; }
         body { font-family: 'Arial', sans-serif; background-color: #0a0a0a; color: #e0e0e0; line-height: 1.6; }
         a { text-decoration: none; color: #00ff00; }
@@ -57,20 +56,16 @@
         .video-loop { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background: black; }
         .video-loop video { width: 100%; height: auto; max-width: 100%; max-height: 100vh; object-fit: contain; playsinline; }
 
-        .ghost-text { color: #ff0000 !important; font-size: 2rem !important; text-align: center !important; position: fixed !important; top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) !important; z-index: 10000 !important; background: rgba(0, 0, 0, 0.8) !important; padding: 1rem !important; display: none !important; }
         body.ghost-mode * { color: #ff0000 !important; content: "GHOST1" !important; }
 
         footer { background: #000; padding: 2rem; text-align: center; border-top: 2px solid #00ff00; color: #666; }
 
         .noscript { display: none; }
         noscript .noscript { display: block; text-align: center; padding: 2rem; color: #ff4444; }
-        noscript .product-card .add-to-cart { display: none; }
 
         @media (max-width: 768px) {
             .header-container { flex-direction: column; gap: 1rem; }
-            nav ul { gap: 1rem; }
             .hero h1 { font-size: 2.5rem; }
-            .cart-content { width: 95%; padding: 1.5rem; }
             .video-loop video { width: 100vw; height: 100vh; object-fit: cover; }
         }
     </style>
@@ -99,7 +94,7 @@
         </div>
     </section>
 
-    <!-- [PRODUCT SECTIONS UNCHANGED] -->
+    <!-- GROW A GARDEN -->
     <section class="section" id="grow-garden">
         <h2 class="section-title">Grow a Garden Items</h2>
         <div class="product-grid">
@@ -107,30 +102,87 @@
                 <div class="product-image">Cactus</div>
                 <div class="product-info">
                     <h3 class="product-title">Pricklefruit</h3>
-                    <p class="product-price" id="pricklefruit-price">75 Robux</p>
+                    <p class="product-price">75 Robux</p>
                     <p class="stock-info" id="pricklefruit-stock">Quantity Available: 30</p>
-                    <p class="product-description">Rare pricklefruit seeds, each fruit is worth 100-500 billion. Plant now, profit later. Only 30 left.</p>
+                    <p class="product-description">Rare pricklefruit seeds, each fruit is worth 100-500 billion.</p>
                     <button class="add-to-cart" id="pricklefruit-button" onclick="addToCart('Pricklefruit', 'pricklefruit')">Add to Cart</button>
-                    <div class="noscript">JavaScript required for purchases. Contact us via Discord.</div>
                 </div>
             </div>
             <div class="product-card" id="agedpet-card">
                 <div class="product-image">Dog</div>
                 <div class="product-info">
                     <h3 class="product-title">Aged Pet</h3>
-                    <p class="product-price" id="agedpet-price">100 Robux</p>
+                    <p class="product-price">100 Robux</p>
                     <p class="stock-info" id="agedpet-stock">Quantity Available: 15</p>
-                    <p class="product-description">Mature companion for your garden: Aged Pet. Age 30-50. Grow with wisdom.</p>
+                    <p class="product-description">Mature companion. Age 30-50.</p>
                     <button class="add-to-cart" id="agedpet-button" onclick="addToCart('Aged Pet', 'agedpet')">Add to Cart</button>
-                    <div class="noscript">JavaScript required for purchases. Contact us via Discord.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- [OTHER SECTIONS: steal-brainrot, plants-vs-brainrots — SAME AS BEFORE] -->
+    <!-- STEAL A BRAINROT -->
+    <section class="section" id="steal-brainrot">
+        <h2 class="section-title">Steal a Brainrot Items</h2>
+        <div class="product-grid">
+            <div class="product-card" id="tacorita-card">
+                <div class="product-image">Bicycle</div>
+                <div class="product-info">
+                    <h3 class="product-title">Tacorita Bicicleta</h3>
+                    <p class="product-price">1000 Robux</p>
+                    <p class="stock-info" id="tacorita-stock">Quantity Available: 1</p>
+                    <p class="product-description">50m a second. One only.</p>
+                    <button class="add-to-cart" id="tacorita-button" onclick="addToCart('Tacorita Bicicleta', 'tacorita')">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" id="chachechi-card">
+                <div class="product-image">Snake</div>
+                <div class="product-info">
+                    <h3 class="product-title">Chachechi</h3>
+                    <p class="product-price">355 Robux</p>
+                    <p class="stock-info" id="chachechi-stock">Quantity Available: 1</p>
+                    <button class="add-to-cart" id="chachechi-button" onclick="addToCart('Chachechi', 'chachechi')">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" id="lacucaracha-card">
+                <div class="product-image">Ladybug</div>
+                <div class="product-info">
+                    <h3 class="product-title">La Cucaracha</h3>
+                    <p class="product-price">325 Robux</p>
+                    <p class="stock-info" id="lacucaracha-stock">Quantity Available: 1</p>
+                    <button class="add-to-cart" id="lacucaracha-button" onclick="addToCart('La Cucaracha', 'lacucaracha')">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" id="karkersahur-card">
+                <div class="product-image">Bat</div>
+                <div class="product-info">
+                    <h3 class="product-title">Karker Sahur</h3>
+                    <p class="product-price">400 Robux</p>
+                    <p class="stock-info" id="karkersahur-stock">Quantity Available: 1</p>
+                    <button class="add-to-cart" id="karkersahur-button" onclick="addToCart('Karker Sahur', 'karkersahur')">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Cart Modal -->
+    <!-- PLANTS VS BRAINROTS -->
+    <section class="section" id="plants-vs-brainrots">
+        <h2 class="section-title">Plants Vs Brainrots</h2>
+        <div class="product-grid">
+            <div class="product-card" id="mythicalmoneymakers-card">
+                <div class="product-image">Money</div>
+                <div class="product-info">
+                    <h3 class="product-title">Mythical Money Makers</h3>
+                    <p class="product-price">125 Robux</p>
+                    <p class="stock-info" id="mythicalmoneymakers-stock">Quantity Available: 25</p>
+                    <p class="product-description">1.2-3k a second. 25 available.</p>
+                    <button class="add-to-cart" id="mythicalmoneymakers-button" onclick="addToCart('Mythical Money Makers', 'mythicalmoneymakers')">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CART MODAL -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-content">
             <span class="close-cart" onclick="toggleCart()">&times;</span>
@@ -141,24 +193,21 @@
         </div>
     </div>
 
-    <!-- Secret Video Loop (Stock Out) -->
+    <!-- VIDEOS -->
     <div class="video-loop" id="videoLoop">
         <video id="goatVideo" autoplay loop playsinline>
             <source src="goatVideo.mp4" type="video/mp4">
-            Your browser does not support the video tag.
         </video>
     </div>
 
-    <!-- Secret Home Video Loop (5 Home Clicks) -->
     <div class="video-loop" id="homeVideoLoop">
         <video id="homeVideo" autoplay loop playsinline>
             <source src="https://drive.google.com/uc?export=download&id=130fOVOJULIk3At3_ThqsiwFHfQLEo4hp" type="video/mp4">
-            Your browser does not support the video tag.
         </video>
     </div>
 
     <footer id="contact">
-        <p>&copy; 2025 GhostMarket. No limits, all access. Contact us via Discord: <a href="https://discord.gg/4e7kf2QQWe">https://discord.gg/4e7kf2QQWe</a></p>
+        <p>&copy; 2025 GhostMarket. Contact: <a href="https://discord.gg/4e7kf2QQWe">Discord</a></p>
     </footer>
 
     <script>
@@ -166,182 +215,139 @@
         const homeVideoActive = sessionStorage.getItem('homeVideoActive') === 'true';
         const stockOutActive = sessionStorage.getItem('stockOutActive') === 'true';
 
-        // ==== ON LOAD: RESTORE VIDEO STATE ====
-        document.addEventListener('DOMContentLoaded', () => {
-            const noscriptElements = document.querySelectorAll('.noscript');
-            noscriptElements.forEach(el => el.style.display = 'none');
+        // ==== STOCK (FULLY RESTORED) ====
+        let stock = {
+            pricklefruit: 30,
+            agedpet: 15,
+            tacorita: 1,
+            chachechi: 1,
+            lacucaracha: 1,
+            karkersahur: 1,
+            mythicalmoneymakers: 25
+        };
 
-            // Restore home video
-            if (homeVideoActive) {
-                triggerHomeVideo();
-            }
-
-            // Restore stock-out video
-            if (stockOutActive) {
-                triggerStockOutVideo();
-            }
-        });
-
-        // ==== CART & STOCK LOGIC (unchanged) ====
+        let prices = { pricklefruit: 75, agedpet: 100, tacorita: 1000, chachechi: 355, lacucaracha: 325, karkersahur: 400, mythicalmoneymakers: 125 };
         let cart = [];
         let totalRobux = 0;
-        let stock = {
-            pricklefruit: 30, agedpet: 15, tacorita: 1, chachechi: 1,
-            lacucaracha: 1, karkersahur: 1, mythicalmoneymakers: 25
-        };
-        let prices = { pricklefruit: 75, agedpet: 100, tacorita: 1000, chachechi: 355, lacucaracha: 325, karkersahur: 400, mythicalmoneymakers: 125 };
-
         let homeClickCount = 0;
 
-        function handleHomeClick(event) {
-            event.preventDefault();
+        // ==== ON LOAD: RESTORE VIDEO + STOCK UI ====
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.noscript').forEach(el => el.style.display = 'none');
+            updateStockUI();
+
+            if (homeVideoActive) triggerHomeVideo();
+            if (stockOutActive) triggerStockOutVideo();
+        });
+
+        function updateStockUI() {
+            Object.keys(stock).forEach(id => {
+                const el = document.getElementById(`${id}-stock`);
+                if (el) el.textContent = `Quantity Available: ${stock[id]}`;
+                const btn = document.getElementById(`${id}-button`);
+                if (btn && stock[id] <= 0) {
+                    btn.disabled = true;
+                    btn.textContent = 'Out of Stock';
+                    btn.style.background = '#666';
+                }
+            });
+        }
+
+        function handleHomeClick(e) {
+            e.preventDefault();
             homeClickCount++;
             if (homeClickCount === 5) {
-                triggerHomeVideo();
                 sessionStorage.setItem('homeVideoActive', 'true');
+                triggerHomeVideo();
                 homeClickCount = 0;
             }
         }
 
         function triggerHomeVideo() {
-            const homeVideoLoop = document.getElementById('homeVideoLoop');
-            const homeVideo = document.getElementById('homeVideo');
-            homeVideoLoop.style.display = 'block';
-            homeVideo.load();
-            homeVideo.play().catch(() => {});
-            flashGhostMode();
+            const loop = document.getElementById('homeVideoLoop');
+            const vid = document.getElementById('homeVideo');
+            loop.style.display = 'block';
+            vid.load();
+            vid.play().catch(() => {});
+            flashGhost();
             document.body.style.overflow = 'hidden';
         }
 
         function triggerStockOutVideo() {
-            const videoLoop = document.getElementById('videoLoop');
-            const video = document.getElementById('goatVideo');
-            videoLoop.style.display = 'block';
-            video.load();
-            video.play().catch(() => {});
-            flashGhostMode();
+            const loop = document.getElementById('videoLoop');
+            const vid = document.getElementById('goatVideo');
+            loop.style.display = 'block';
+            vid.load();
+            vid.play().catch(() => {});
+            flashGhost();
             document.body.style.overflow = 'hidden';
         }
 
-        function flashGhostMode() {
+        function flashGhost() {
             document.body.classList.add('ghost-mode');
-            setTimeout(() => {
-                document.body.classList.remove('ghost-mode');
-            }, 1000);
+            setTimeout(() => document.body.classList.remove('ghost-mode'), 1000);
         }
 
-        function addToCart(name, itemId) {
-            let stockElement = document.getElementById(`${itemId}-stock`);
-            let buttonElement = document.getElementById(`${itemId}-button`);
-            let currentStock = stock[itemId];
-
-            if (currentStock <= 0) {
-                alert('Out of stock!');
-                return;
-            }
-
-            let price = prices[itemId];
-            cart.push({ name, price });
-            totalRobux += price;
-            stock[itemId]--;
-            stockElement.textContent = `Quantity Available: ${stock[itemId]}`;
-
-            if (stock[itemId] <= 0) {
-                buttonElement.disabled = true;
-                buttonElement.textContent = 'Out of Stock';
-                buttonElement.style.background = '#666';
-            }
-
+        function addToCart(name, id) {
+            if (stock[id] <= 0) return alert('Out of stock!');
+            cart.push({ name, price: prices[id] });
+            totalRobux += prices[id];
+            stock[id]--;
+            updateStockUI();
             document.getElementById('cartCount').textContent = cart.length;
             updateCartDisplay();
-            updateCheckoutButton();
-
-            checkStoreOut();
+            checkStockOut();
         }
 
-        function checkStoreOut() {
-            const allStockZero = Object.values(stock).every(s => s === 0);
-            if (allStockZero && !stockOutActive) {
+        function checkStockOut() {
+            if (Object.values(stock).every(s => s === 0) && !stockOutActive) {
                 sessionStorage.setItem('stockOutActive', 'true');
                 triggerStockOutVideo();
             }
         }
 
-        // ==== REST OF CART FUNCTIONS (unchanged) ====
-        function updateCartDisplay() {
-            const cartItems = document.getElementById('cartItems');
-            cartItems.innerHTML = cart.map((item, index) => `
-                <div class="cart-item">
-                    <span>${item.name} - ${item.price} Robux</span>
-                    <button onclick="removeFromCart(${index})">Remove</button>
-                </div>
-            `).join('');
-            document.getElementById('cartTotal').textContent = `Total: ${totalRobux} Robux`;
-        }
-
-        function removeFromCart(index) {
-            totalRobux -= cart[index].price;
-            let removedItem = cart.splice(index, 1)[0].name.toLowerCase();
-            let itemId = removedItem.includes('prickle') ? 'pricklefruit' :
-                         removedItem.includes('aged') ? 'agedpet' :
-                         removedItem.includes('tacorita') ? 'tacorita' :
-                         removedItem.includes('chachechi') ? 'chachechi' :
-                         removedItem.includes('cucaracha') ? 'lacucaracha' :
-                         removedItem.includes('karker') ? 'karkersahur' :
-                         'mythicalmoneymakers';
-            stock[itemId]++;
-            document.getElementById(`${itemId}-stock`).textContent = `Quantity Available: ${stock[itemId]}`;
-            if (stock[itemId] > 0) {
-                const btn = document.getElementById(`${itemId}-button`);
-                btn.disabled = false;
-                btn.textContent = 'Add to Cart';
-                btn.style.background = '#00ff00';
-            }
+        function removeFromCart(i) {
+            const item = cart.splice(i, 1)[0];
+            totalRobux -= item.price;
+            const id = Object.keys(prices).find(k => item.name.toLowerCase().includes(k.replace(/s$/, ''))) || 'pricklefruit';
+            stock[id]++;
+            updateStockUI();
             document.getElementById('cartCount').textContent = cart.length;
             updateCartDisplay();
-            updateCheckoutButton();
-
-            // Re-check if stock-out was undone
-            const allZero = Object.values(stock).every(s => s === 0);
-            if (!allZero && sessionStorage.getItem('stockOutActive') === 'true') {
+            if (sessionStorage.getItem('stockOutActive') === 'true' && !Object.values(stock).every(s => s === 0)) {
                 sessionStorage.removeItem('stockOutActive');
             }
         }
 
-        function toggleCart() {
-            const modal = document.getElementById('cartModal');
-            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        function updateCartDisplay() {
+            document.getElementById('cartItems').innerHTML = cart.map((item, i) => `
+                <div class="cart-item">
+                    <span>${item.name} - ${item.price} Robux</span>
+                    <button onclick="removeFromCart(${i})">Remove</button>
+                </div>
+            `).join('');
+            document.getElementById('cartTotal').textContent = `Total: ${totalRobux} Robux`;
+            document.getElementById('checkoutBtn').disabled = cart.length === 0;
         }
 
-        function updateCheckoutButton() {
-            document.getElementById('checkoutBtn').disabled = cart.length === 0;
+        function toggleCart() {
+            const m = document.getElementById('cartModal');
+            m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
         }
 
         function checkout() {
             if (cart.length === 0) return alert('Cart empty.');
-            if (confirm(`Proceed to payment? Total: ${totalRobux} Robux.`)) {
-                window.location.href = `https://discord.gg/eaekQmhNK3`;
+            if (confirm(`Pay ${totalRobux} Robux?`)) {
+                window.location.href = 'https://discord.gg/eaekQmhNK3';
                 cart = []; totalRobux = 0;
                 document.getElementById('cartCount').textContent = 0;
                 updateCartDisplay(); toggleCart();
             }
         }
 
-        // Hook addToCart & checkout
+        // Hook
         const origAdd = addToCart;
-        addToCart = (n, i) => { origAdd(n, i); checkStoreOut(); };
-        const origCheckout = checkout;
-        checkout = () => { origCheckout(); checkStoreOut(); };
-
-        window.onerror = () => {
-            alert('JS error. Enable JS or contact Discord: https://discord.gg/eaekQmhNK3');
-        };
+        addToCart = (n, i) => { origAdd(n, i); checkStockOut(); };
     </script>
-    <noscript>
-        <div class="noscript">
-            <h2>JavaScript is disabled</h2>
-            <p>Please enable JavaScript. Contact: <a href="https://discord.gg/eaekQmhNK3">Discord</a></p>
-        </div>
-    </noscript>
 </body>
 </html>
